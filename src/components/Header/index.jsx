@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import useAuth from '../../hooks/useAuth';
 
 export default function Header() {
-  // const navigate = useNavigate();
   const {logout}= useAuth();
 
   const handleLogout = () => {
@@ -11,7 +10,7 @@ export default function Header() {
   };
 
   return (
-    <header className="bg-blue-600 text-white p-4 flex justify-between items-center">
+    <header className="bg-blue-600 text-white p-4 pl-[15%] flex justify-between items-center">
       <div className="text-xl font-bold">Dashboard</div>
       <nav className="flex items-center space-x-6">
         <Link to="/profile" className="hover:underline">Profile</Link>

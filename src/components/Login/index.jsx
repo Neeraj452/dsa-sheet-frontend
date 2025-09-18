@@ -1,14 +1,14 @@
 import { useState } from "react";
-import { loginUser } from "../../service/api";
+import { loginUser, userRagister } from "../../service/api";
 import { useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
-// import useAuth from "../../hooks/useAuth";
-// import { useAuth } from "../../context/context";
+
 
 export default function Login() {
   const navigation = useNavigate();
   const { login } = useAuth();
   const [formData, setFormData] = useState({
+    name:"",
     email: "neeraj@example.com",
     password: "MyStrongPassword123",
     reenterPassword: ""
@@ -32,10 +32,8 @@ export default function Login() {
         setError("Passwords do not match.");
         return;
       }
-      // Sign Up logic here
-      console.log("Signing Up...");
-      console.log("Email:", formData.email);
-      console.log("Password:", formData.password);
+    
+      userRagister(formData,navigation,login)
     } else {
       loginUser(formData,navigation,login)
     }
@@ -48,6 +46,20 @@ export default function Login() {
           {isSignUp ? "Sign Up" : "Login"}
         </h2>
         <form onSubmit={handleSubmit} className="space-y-4">
+       { isSignUp&&<div>
+            <label htmlFor="name" className="block text-black text-sm font-medium mb-1">
+              Name
+            </label>
+            <input
+              id="name"
+              name="name"
+              type="text"
+              value={formData.name}
+              onChange={handleChange}
+              required
+              className="w-full px-4 py-2 border border-gray-500 rounded-md focus:ring-2 focus:ring-blue-500"
+            />
+          </div>}
           <div>
             <label htmlFor="email" className="block text-black text-sm font-medium mb-1">
               Email
@@ -109,7 +121,7 @@ export default function Login() {
                   setIsSignUp(false);
                   setError("");
                 }}
-                className="text-blue-600 hover:underline"
+                className="text-blue-600 hover:underline cursor-pointer"
               >
                 Login
               </button>
@@ -122,7 +134,7 @@ export default function Login() {
                   setIsSignUp(true);
                   setError("");
                 }}
-                className="text-blue-600 hover:underline"
+                className="text-blue-600 hover:underline cursor-pointer"
               >
                 Sign Up
               </button>

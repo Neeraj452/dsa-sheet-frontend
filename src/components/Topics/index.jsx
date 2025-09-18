@@ -25,7 +25,29 @@ const Topics = () => {
     };
 
     const handleCheckboxChange = (subjectId, topicId, status, topicIndex, subIndex) => {
-        progressUpdate({ userId: "68c8cab74a234bfddaa8dab9", subjectId, topicId, status: status === "done" ? "pending" : "done" }, getSubject(setLoading, setData))
+        setCheckedItems((prev) => ({
+            ...prev,
+            [topicId]: !prev[topicId]
+        }));
+
+        const updatedSubjects = [...subjects];
+        const topic = updatedSubjects[topicIndex].topics[subIndex];
+        topic.status = topic.status === "done" ? "pending" : "done";
+        setSubjects(updatedSubjects);
+        const progressData = {
+            subjectId: subjectId,
+            topicId: topicId,
+            status: topic.status
+        };
+        progressUpdate(progressData);
+        const allTopicsDone = updatedSubjects[topicIndex].topics.every(t => t.status === "done");
+        if(allTopicsDone){
+            updatedSubjects[topicIndex].status = "done";
+            setSubjects(updatedSubjects);
+        }else{
+            updatedSubjects[topicIndex].status = "pending";
+            setSubjects(updatedSubjects);
+        }
     };
     return (
         <div className="max-w-4xl mx-auto p-4">
@@ -33,6 +55,7 @@ const Topics = () => {
             <p className="text-center mb-8 text-black">Explore these exciting topics!</p>
 
             {
+                loading ? <p className="text-center">Loading...</p>:
                 subjects.length > 0 ? subjects.map((topic, topicIndex) => (
                     <div key={topic.subjectId} className="mb-4 border rounded-lg">
                         {/* Accordion Header */}
@@ -79,7 +102,7 @@ const Topics = () => {
                                                     <label className="inline-flex items-center">
                                                         <input
                                                             type="checkbox"
-                                                            checked={sub?.status === "done"? true : false}
+                                                            checked={checkedItems[sub._id]}
                                                             onChange={() => handleCheckboxChange(topic?.subjectId, sub?._id, sub?.status, topicIndex, subIndex)}
                                                             className="accent-blue-500 mr-2"
                                                         />

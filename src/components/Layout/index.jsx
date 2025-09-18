@@ -1,4 +1,3 @@
-// src/components/Layout.jsx
 import { useEffect } from "react";
 import { Outlet, useNavigate, useLocation } from "react-router-dom";
 import Header from "../Header";
@@ -8,13 +7,10 @@ const Layout = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const {token} = useAuth()
-console.log("Token in Layout==================:", token);
   useEffect(() => {
     if (!token) {
-      console.log("No token found, redirecting to /");
       navigate("/");
     } else {
-      console.log("Redirecting to /profile");
       if (location.pathname === "/") {
         navigate("/profile");
       }
