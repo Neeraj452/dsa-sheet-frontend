@@ -16,9 +16,9 @@ const ProgressReports = () => {
             <p>Loading...</p>
         ) : (
             <div className="">
-            <p className="mb-2 text-black">Easy: {data?.easy?.percentage}</p>
-            <p className="mb-2 text-black">Medium: {data?.medium?.percentage}</p>
-            <p className="mb-2 text-black">Hard: {data?.hard?.percentage}</p>
+            <p className="mb-2 text-black">Easy: {data?.easy?.percentage}%</p>
+            <p className="mb-2 text-black">Medium: {data?.medium?.percentage}%</p>
+            <p className="mb-2 text-black">Hard: {data?.hard?.percentage}%</p>
            
             </div>
         )}
