@@ -111,7 +111,7 @@ const Topics = () => {
                                                 </td>
                                                 <td className="px-4 py-2 text-center ">
                                                     <a
-                                                        href="#"
+                                                        href={sub.leetcodeLink}
                                                         className="text-blue-600 underline"
                                                         target="_blank"
                                                         rel="noreferrer"
@@ -121,7 +121,7 @@ const Topics = () => {
                                                 </td>
                                                 <td className="px-4 py-2 text-center">
                                                     <a
-                                                        href="#"
+                                                        href={sub.youtubeLink}
                                                         className="text-blue-600 underline"
                                                         target="_blank"
                                                         rel="noreferrer"
@@ -131,7 +131,7 @@ const Topics = () => {
                                                 </td>
                                                 <td className="px-4 py-2 text-center">
                                                     <a
-                                                        href="#"
+                                                        href={sub.articleLink}
                                                         className="text-blue-600 underline"
                                                         target="_blank"
                                                         rel="noreferrer"
